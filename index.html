@@ -1,23 +1,28 @@
 ---
 layout: default
+title: Главная
 ---
 
-<div class="home">
+<a href="{{ site.img_url }}/mindmap.png" target="_blank"><img src="{{  site.img_url }}/mindmap.png" style="max-width: 90%" /></a>
+<ol>
+{% for chapt in site.chapters %}
+{% assign id = chapt.title %}
+<li><a href="#{{ id }}">{{ chapt.title }}</a></li>
+{% endfor %}
+</ol>
 
-  <h1 class="page-heading">Posts</h1>
 
-  <ul class="post-list">
-    {% for post in site.posts %}
-      <li>
-        <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
+<div class="chapters">
+  {% for chapt in site.chapters %}
+  {% assign id = chapt.title %}
+  <div class="chapt" id="{{ id }}">
+    <h1 class="chapt-title">
+      <a href="#{{ id }}">
+        {{ chapt.title }}
+      </a>
+    </h1>
 
-        <h2>
-          <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-        </h2>
-      </li>
-    {% endfor %}
-  </ul>
-
-  <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
-
+    {{ chapt.content }}
+  </div>
+  {% endfor %}
 </div>
